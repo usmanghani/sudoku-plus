@@ -108,21 +108,7 @@ public class SudokuPlusValidator {
         	// make a copy so we don't modify the original array.
         	int[] currentRow = Arrays.copyOf(sudokuBoard[i], totalSize);
         	
-        	// Sort the linearized box.
-            Arrays.sort(currentRow);
-
-            // Make sure that each box has all the elements.
-            // If we sort the elements, and iterate through them,
-            // each element will be equal to the loop index + 1.
-            // If this is not the case, then the solution is not valid.
-            for (int index = 0; index < totalSize; index++) {
-                if (currentRow[index] != index + 1) {
-                    
-                    throw new InvalidBoardException(
-                    		String.format("Row %d is invalid.\n", i + 1));
-
-                }
-            }
+        	arrayHasAllElements(currentRow, i, "Row");
         }
         
         // Check each column now.
@@ -135,21 +121,7 @@ public class SudokuPlusValidator {
         		currentCol[rowIndex] = sudokuBoard[rowIndex][i];
         	}
         	
-        	// Sort the linearized box.
-            Arrays.sort(currentCol);
-
-            // Make sure that each box has all the elements.
-            // If we sort the elements, and iterate through them,
-            // each element will be equal to the loop index + 1.
-            // If this is not the case, then the solution is not valid.
-            for (int index = 0; index < totalSize; index++) {
-                if (currentCol[index] != index + 1) {
-                    
-                    throw new InvalidBoardException(
-                    		String.format("Col %d is invalid.\n", i + 1));
-
-                }
-            }
+        	arrayHasAllElements(currentCol, i, "Col");
         }
         
         // For an NxN sudoku board, we will have N boxes within that board,
@@ -171,21 +143,7 @@ public class SudokuPlusValidator {
                 }
             }
 
-            // Sort the linearized box.
-            Arrays.sort(boxLinearized);
-
-            // Make sure that each box has all the elements.
-            // If we sort the elements, and iterate through them,
-            // each element will be equal to the loop index + 1.
-            // If this is not the case, then the solution is not valid.
-            for (int index = 0; index < totalSize; index++) {
-                if (boxLinearized[index] != index + 1) {
-                    
-                    throw new InvalidBoardException(
-                    		String.format("Box %d is invalid.\n", i + 1));
-
-                }
-            }
+            arrayHasAllElements(boxLinearized, i, "Box");
         }
 
         return true;
@@ -278,5 +236,34 @@ public class SudokuPlusValidator {
         }
         
         return intArray;
+    }
+    
+    /**
+     * 
+     * @param array The original array. This array is sorted in place so it can't be assumed
+     * to be in the same order after calling this method. 
+     * @param checkType What kind of direction is being checked. Row, Col or Box.
+     * @param checkIndex The index of the box, col or row is being checked.
+     * @return True of False depending on whether all elements are in the array or not.
+     * @throws InvalidBoardException 
+     */
+    private static boolean arrayHasAllElements(int[] array, int checkIndex, String checkType) throws InvalidBoardException {
+    	// Sort the array.
+        Arrays.sort(array);
+
+        // Make sure that each box has all the elements.
+        // If we sort the elements, and iterate through them,
+        // each element will be equal to the loop index + 1.
+        // If this is not the case, then the solution is not valid.
+        for (int index = 0; index < array.length; index++) {
+            if (array[index] != index + 1) {
+                
+                throw new InvalidBoardException(
+                		String.format("%s %d is invalid.\n", checkType, checkIndex + 1));
+
+            }
+        }
+        
+        return true;
     }
 }
