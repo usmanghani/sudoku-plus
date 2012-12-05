@@ -35,6 +35,48 @@ public class SudokuPlusTests {
 	}
 	
 	/**
+	 * Test the failure case where the solution is wrong.
+	 */
+	@Test
+	public void testInvalid4By4Board() {
+		
+		SudokuPlusValidator validator = new SudokuPlusValidator("invalidInput 4x4.txt");
+		assertFalse("Validator with wrong 4x4 solution passed.", validator.isValidNoThrow());
+		try {
+			validator.isValid();
+		} catch (InvalidBoardException e) {
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail("Did not expect this exception at this time.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("Did not expect this exception at this time.");
+		}
+	}
+
+	/**
+	 * Test the failure case where the solution is wrong.
+	 */
+	@Test
+	public void testInvalid9By9Board() {
+		
+		SudokuPlusValidator validator = new SudokuPlusValidator("invalidInput 9x9.txt");
+		assertFalse("Validator with wrong 9x9 solution passed.", validator.isValidNoThrow());
+		try {
+			validator.isValid();
+		} catch (InvalidBoardException e) {
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			fail("Did not expect this exception at this time.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("Did not expect this exception at this time.");
+		}
+	}
+
+	/**
 	 * Test the failure case where the board size is wrong.
 	 */
 	@Test

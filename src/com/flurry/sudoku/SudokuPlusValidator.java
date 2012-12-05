@@ -102,6 +102,56 @@ public class SudokuPlusValidator {
         // The size of each box is the sqrt of the total size.
         int boxSize = (int)Math.sqrt(totalSize);
 
+        // Check each row first.
+        for (int i = 0; i < totalSize; i ++) {
+        	
+        	// make a copy so we don't modify the original array.
+        	int[] currentRow = Arrays.copyOf(sudokuBoard[i], totalSize);
+        	
+        	// Sort the linearized box.
+            Arrays.sort(currentRow);
+
+            // Make sure that each box has all the elements.
+            // If we sort the elements, and iterate through them,
+            // each element will be equal to the loop index + 1.
+            // If this is not the case, then the solution is not valid.
+            for (int index = 0; index < totalSize; index++) {
+                if (currentRow[index] != index + 1) {
+                    
+                    throw new InvalidBoardException(
+                    		String.format("Row %d is invalid.\n", i + 1));
+
+                }
+            }
+        }
+        
+        // Check each column now.
+        for (int i = 0; i < totalSize; i ++) {
+        	
+        	int[] currentCol = new int[totalSize];
+        	
+        	for (int rowIndex = 0; rowIndex < totalSize; rowIndex ++) {
+        		
+        		currentCol[rowIndex] = sudokuBoard[rowIndex][i];
+        	}
+        	
+        	// Sort the linearized box.
+            Arrays.sort(currentCol);
+
+            // Make sure that each box has all the elements.
+            // If we sort the elements, and iterate through them,
+            // each element will be equal to the loop index + 1.
+            // If this is not the case, then the solution is not valid.
+            for (int index = 0; index < totalSize; index++) {
+                if (currentCol[index] != index + 1) {
+                    
+                    throw new InvalidBoardException(
+                    		String.format("Col %d is invalid.\n", i + 1));
+
+                }
+            }
+        }
+        
         // For an NxN sudoku board, we will have N boxes within that board,
         // where each box is of size sqrt(N).
         // This loop goes over all the boxes.
