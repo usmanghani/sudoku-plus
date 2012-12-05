@@ -1,0 +1,4 @@
+junit
+bin
+# For macs
+.DS_Store
