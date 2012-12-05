@@ -45,7 +45,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (InvalidBoardException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
@@ -66,7 +66,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (InvalidBoardException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
@@ -87,7 +87,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (InvalidBoardException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
@@ -109,7 +109,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (InvalidBoardException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
@@ -133,7 +133,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (NumberFormatException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (InvalidBoardException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
@@ -157,7 +157,7 @@ public class SudokuPlusTests {
 		try {
 			validator.isValid();
 		} catch (NumberFormatException e) {
-			
+			System.out.println(e.getMessage());
 		} catch (InvalidBoardException e) {
 			e.printStackTrace();
 			fail("Did not expect this exception at this time.");
